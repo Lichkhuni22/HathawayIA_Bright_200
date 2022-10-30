@@ -38,6 +38,7 @@ bool flag = true;
 
 //byte num = 0;//int
 byte button_num = 0;
+byte previous_button = 0;
 
 bool pushed_button_1 = false;
 bool pushed_button_2 = false;
@@ -1701,6 +1702,7 @@ void readButtons(){
           }
           flag = true;
           //Serial.println(button_num);
+          previous_button = 1;
         }
       else                                                           // blue button just released
         {
@@ -1715,41 +1717,46 @@ void readButtons(){
           //delay(15000);
           button_num = 2;
           i=67;
-          while (i > 0){
-                //led2Mode3On();
-                leds[72] = CRGB(255,0,255);
-                leds[73] = CRGB(255,0,255);
-                leds[74] = CRGB(255,0,255);
-                leds[75] = CRGB(255,0,255);
-                leds[76] = CRGB(255,0,255);
-                leds[71] = CRGB(255,0,255);
-                leds[70] = CRGB(255,0,255);
-                leds[69] = CRGB(255,0,255);
-                leds[68] = CRGB(255,0,255);
-                leds[i+76] = CRGB::Black;
-                leds[67-i] = CRGB::Black;
+          if(previous_button == 1){
+              while (i > 0){
+                    //led2Mode3On();
+                    leds[72] = CRGB(255,0,255);
+                    leds[73] = CRGB(255,0,255);
+                    leds[74] = CRGB(255,0,255);
+                    leds[75] = CRGB(255,0,255);
+                    leds[76] = CRGB(255,0,255);
+                    leds[71] = CRGB(255,0,255);
+                    leds[70] = CRGB(255,0,255);
+                    leds[69] = CRGB(255,0,255);
+                    leds[68] = CRGB(255,0,255);
+                    leds[i+76] = CRGB::Black;
+                    leds[67-i] = CRGB::Black;
+                    FastLED.show();
+                    i--;
+              }
+              delay(150);
+              for(int k=44;k>=0;k=k-4){//k-- k=k-2
+                leds[k+20] = CRGB(255,0,255);
+                leds[k+21] = CRGB(255,0,255);
+                leds[k+22] = CRGB(255,0,255);
+                leds[k+23] = CRGB(255,0,255);
+                //leds[k+22] = CRGB(255,0,255);
+                leds[k+32] = CRGB::Black;
+                leds[k+31] = CRGB::Black;
+                leds[k+30] = CRGB::Black;
+                leds[k+29] = CRGB::Black;
+                //leds[k+31] = CRGB::Black;
                 FastLED.show();
-                i--;
+              }
+        
+              delay(200);
           }
-          delay(150);
-          for(int k=44;k>=0;k=k-4){//k-- k=k-2
-            leds[k+20] = CRGB(255,0,255);
-            leds[k+21] = CRGB(255,0,255);
-            leds[k+22] = CRGB(255,0,255);
-            leds[k+23] = CRGB(255,0,255);
-            //leds[k+22] = CRGB(255,0,255);
-            leds[k+32] = CRGB::Black;
-            leds[k+31] = CRGB::Black;
-            leds[k+30] = CRGB::Black;
-            leds[k+29] = CRGB::Black;
-            //leds[k+31] = CRGB::Black;
-            FastLED.show();
+          else{
+            turnOffLed1();
+            
           }
-    
-          delay(200);
-
           
-          turnOffLed1();
+          //turnOffLed1();
           turnOffLed2();
           //attentionStatus();
           FastLED.show();
@@ -1760,6 +1767,7 @@ void readButtons(){
 //          FastLED.show();
           
           //Serial.println(button_num);
+          previous_button = 2;
         }
       else                                                           // red button just released
         {
@@ -1782,6 +1790,7 @@ void readButtons(){
           //FastLED.show();
           //delay(15000);
           //Serial.println(num);
+          previous_button = 3;
         }
       else                                                           // green button just released
         {
@@ -1805,6 +1814,7 @@ void readButtons(){
           //delay(15000);
           
           //Serial.println(num);
+          previous_button = 4;
         }
       else                                                           // cyan button just released
         {
@@ -1826,6 +1836,7 @@ void readButtons(){
           //delay(15000);
 
           //Serial.println(num);
+          previous_button = 5;
         }
       else                                                           // blue button just released
         {
@@ -1842,6 +1853,7 @@ void readButtons(){
           i = 0;
           flag = true;
           //Serial.println(num);
+          previous_button = 6;
         }
       else                                                           // blue button just released
         {
@@ -1857,7 +1869,7 @@ void readButtons(){
           turnOffLed2();
           flag = true;
           //Serial.println(num);
-          // ...
+          previous_button = 7;
         }
       else                                                           // blue button just released
         {
