@@ -391,7 +391,7 @@ void loop()
         break;
       case 2:
           Serial.println("Mode 2 On.");
-          
+          Serial.println(i);
           ledMode10On();
 
         break;
@@ -1155,6 +1155,7 @@ void ledBarLitFull(){
 
 void ledMode1On(){
   //text8On();
+  turnOffLed1();
   if(flag){
     
         if (i < 92){//67,Mode1Size,136//100--16 32--84
@@ -1259,7 +1260,7 @@ leds[i+24] = CRGB(255,0,255);//36,30
     
       //i++;
       i=i+4;//SPEED 4
-      //Serial.println(i);
+      Serial.println(i);
       if(i==92){//139//66//72-5//67//65//==100>100 92
         //rightBlinking();
         leds[119] = CRGB(255,0,255);
@@ -1753,10 +1754,10 @@ void readButtons(){
           }
           else{
             turnOffLed1();
-            
+            i=0;
           }
           
-          //turnOffLed1();
+          turnOffLed1();
           turnOffLed2();
           //attentionStatus();
           FastLED.show();
